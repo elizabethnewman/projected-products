@@ -1,4 +1,4 @@
-# projected-products
+# Projected Tensor-Tensor Products
 Projected tensor-tensor products for multiway data compression
 
 
@@ -30,11 +30,9 @@ C = projprod(A, B, Q);
 [U, S, V] = projsvd(A, B, Q);
 ```
 
-
-
-
-
 # Citation
 ```console
 TBD
 ```
+
+
