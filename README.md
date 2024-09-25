@@ -34,6 +34,6 @@ C = projprod(A, B, Q);
 TBD
 ```
 
-The scripts to reproduce the results from the paper are available in the [https://github.com/elizabethnewman/projected-products/tree/main/experimentsFromPaper](experimentsFromPaper) directory.
+The scripts to reproduce the results from the paper are available in the [experimentsFromPaper](https://github.com/elizabethnewman/projected-products/tree/main/experimentsFromPaper) directory.
 
 
