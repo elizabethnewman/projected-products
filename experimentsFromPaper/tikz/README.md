@@ -1,5 +1,7 @@
 ## Creating Images
 
+**In Progress**
+
 After running all experiments, to generate the images from the paper, 
 
 1. Run the Matlab script ```extractCSVSubset``` to obtain the appropriate filenames for fast compliation of images.
