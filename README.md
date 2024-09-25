@@ -1,6 +1,5 @@
 # Projected Tensor-Tensor Products
-Projected tensor-tensor products for multiway data compression
-
+A lightweight package to compute projected tensor-tensor products for multiway data compression
 
 # Installation and Setup
 
@@ -34,5 +33,7 @@ C = projprod(A, B, Q);
 ```console
 TBD
 ```
+
+The scripts to reproduce the results from the paper are available in the [https://github.com/elizabethnewman/projected-products/tree/main/experimentsFromPaper](experimentsFromPaper) directory.
 
 
