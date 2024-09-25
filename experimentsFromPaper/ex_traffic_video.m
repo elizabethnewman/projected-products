@@ -3,7 +3,7 @@ clear; clc;
 
 %% load data
 
-video = read(VideoReader('shuttle.avi'));
+video = read(VideoReader('traffic.mj2'));
 A = zeros(size(video,1),size(video,2),size(video,4));
 for i = 1:size(video,4)
     A(:,:,i) = squeeze(im2gray(video(:,:,:,i)));
@@ -12,7 +12,7 @@ end
 % normalize
 A = A / fronorm(A);
 
-saveDir  = './results_shuttle/';
+saveDir  = './results_traffic/';
 fileName = 'results';
 if ~exist(saveDir, 'dir'), mkdir(saveDir); end
 if ~exist([saveDir,'orig'], 'dir'), mkdir([saveDir,'orig']); end

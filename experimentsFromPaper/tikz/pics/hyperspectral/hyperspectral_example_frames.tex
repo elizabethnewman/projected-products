@@ -1,0 +1,31 @@
+
+
+\begin{tikzpicture}
+
+% CHOOSE DIRECTORY
+\def\myDir{results/hyperspectral}
+
+\def\w{3}
+\def\s{0.1}
+
+\foreach[count=\a from 1] \myname in {I, W, C, Z}{
+	\node (n\a) at (\a*\w+\a*\s,1.5*\w+1.5*\s) {\includegraphics[width=\w cm]{\myDir/\myname/RGB_img_k1_p10.png}};
+	\node (m\a) at (\a*\w+\a*\s,0.5*\w+0.5*\s) {\includegraphics[width=\w cm]{\myDir/\myname/RGB_img_k5_p10.png}};
+	\node (q\a) at (\a*\w+\a*\s,-0.5*\w-0.5*\s) {\includegraphics[width=\w cm]{\myDir/\myname/RGB_img_k20_p50.png}};
+	\node (p\a) at (\a*\w+\a*\s,-1.5*\w-1.5*\s) {\includegraphics[width=\w cm]{\myDir/\myname/RGB_img_k20_p100.png}};
+}
+
+\node[above=0.0cm of n1.north, anchor=south] (t1) {$\bfQ = \bfI_{:,1:p}$};
+\node at (t1 -| n2) (t2)  {$\bfQ = \bfW_{:,1:p}$};
+\node at (t2 -| n3) (t3)  {$\bfQ = \bfC_{1:p,:}^\top$};
+\node at (t3 -| n4) (t4)  {$\bfQ = \bfU_3(:,1:p)$};
+
+\node[above=0.0cm of n1.west, anchor=south, rotate=90] {$\begin{aligned} k&=1\\ p&=10\end{aligned}$};
+\node[above=0.0cm of m1.west, anchor=south, rotate=90] {$\begin{aligned} k&=5\\ p&=10\end{aligned}$};
+\node[above=0.0cm of q1.west, anchor=south, rotate=90] {$\begin{aligned} k&=20\\ p&=50\end{aligned}$};
+\node[above=0.0cm of p1.west, anchor=south, rotate=90] {$\begin{aligned} k&=20\\ p&=100\end{aligned}$};
+
+\node[anchor=east] at (0,0) (m0) {\includegraphics[width=\w cm]{\myDir/RGB_img.png}};
+\node[above=0.0cm of m0.north, anchor=south] {ground truth};
+\end{tikzpicture}
+

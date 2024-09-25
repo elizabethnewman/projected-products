@@ -1,0 +1,44 @@
+
+
+\begin{tikzpicture}
+
+
+% CHOOSE DIRECTORY
+\def\myDir{../results_traffic}
+
+\def\w{3}
+\def\s{0.1}
+\def\scale{0.4453}
+
+\foreach[count=\a from 1] \myname in {I, W, C, Z}{
+	\ifthenelse{\a < 2}{
+	
+	\node (n\a) {\includegraphics[width=\w cm]{\myDir/\myname/img/frame_75_k1_p10.png}};
+	
+	}{
+	\pgfmathsetmacro{\b}{int(\a - 1)}
+	\node[right=-0.25cm of n\b.east, anchor=west] (n\a) {\includegraphics[width=\w cm]{\myDir/\myname/img/frame_75_k1_p10.png}};
+	}
+	
+	\node[below=-0.25cm of n\a.south, anchor=north] (m\a) {\includegraphics[width=\w cm]{\myDir/\myname/img/frame_75_k5_p10.png}};
+	
+	\node[below=-0.25cm of m\a.south, anchor=north]  (q\a){\includegraphics[width=\w cm]{\myDir/\myname/img/frame_75_k20_p50.png}};
+	
+	\node[below=-0.25cm of q\a.south, anchor=north] (p\a) {\includegraphics[width=\w cm]{\myDir/\myname/img/frame_75_k20_p100.png}};
+}
+
+\node[above=0.0cm of n1.north, anchor=south] (t1) {$\bfQ = \bfI_{:,1:p}$};
+\node at (t1 -| n2) (t2)  {$\bfQ = \bfW_{:,1:p}$};
+\node at (t2 -| n3) (t3)  {$\bfQ = \bfC_{1:p,:}^\top$};
+\node at (t3 -| n4) (t4)  {$\bfQ = \bfU_3(:,1:p)$};
+
+\node[above=0.0cm of n1.west, anchor=south, rotate=90] {$\begin{aligned} k&=1\\ p&=10\end{aligned}$};
+\node[above=0.0cm of m1.west, anchor=south, rotate=90] {$\begin{aligned} k&=5\\ p&=10\end{aligned}$};
+\node[above=0.0cm of q1.west, anchor=south, rotate=90] {$\begin{aligned} k&=20\\ p&=50\end{aligned}$};
+\node[above=0.0cm of p1.west, anchor=south, rotate=90] {$\begin{aligned} k&=20\\ p&=100\end{aligned}$};
+
+\node at ($(m1.west)!0.5!(q1.west)$) (mid) {};
+\node[left=1.0cm of mid.west, anchor=east] (m0)  {\includegraphics[width=\w cm]{\myDir/frame_75.png}};
+\node[above=0.0cm of m0.north, anchor=south] {ground truth};
+\end{tikzpicture}
+

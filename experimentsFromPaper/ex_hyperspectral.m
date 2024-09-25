@@ -3,16 +3,13 @@ clear; clc;
 
 %% load data
 
-video = read(VideoReader('shuttle.avi'));
-A = zeros(size(video,1),size(video,2),size(video,4));
-for i = 1:size(video,4)
-    A(:,:,i) = squeeze(im2gray(video(:,:,:,i)));
-end
+hcube = hypercube('indian_pines.dat');
+A     = hcube.DataCube;
 
 % normalize
 A = A / fronorm(A);
 
-saveDir  = './results_shuttle/';
+saveDir  = './results_hyperspectral/';
 fileName = 'results';
 if ~exist(saveDir, 'dir'), mkdir(saveDir); end
 if ~exist([saveDir,'orig'], 'dir'), mkdir([saveDir,'orig']); end
@@ -25,8 +22,11 @@ storeA      = n1 * n2 * n3;
 %% form data-dependent transformation
 [Z,S,~] = svd(modeUnfold(A,3),'econ');
 
+% get cumulative energy
+E = cumsum(diag(S).^2) / sum(diag(S).^2);
+
 % store mode-3 unfolding singular values
-T = array2table([(1:size(S,1))',diag(S)],'VariableNames',{'index', 'sigma'});
+T = array2table([(1:size(S,1))',diag(S),E(:)],'VariableNames',{'index', 'sigma', 'cummulative_energy'});
 writetable(T,[saveDir,'mode3_singular_values.csv'])
 
 %% matrix approximation
@@ -143,33 +143,23 @@ writetable(T,[saveDir,'rel_error_color_scales.csv'], 'writevariablenames', 1)
 
 kpPairs = [1, 10; 5,10; 20, 50; 20, 100];
 frame   = 75;
+[R,G,B] = deal(26,16,8);
 
 figure(1); clf;
-imagesc(A(:,:,frame));
+imagesc(rescale(A(:,:,[R,G,B])));
 cax = clim;
 axis('off'); 
 pbaspect([size(A,2) size(A,1) 1])
-exportgraphics(gcf,[saveDir,'/frame_',num2str(frame),'.png'])
+exportgraphics(gcf,[saveDir,'/img_RGB_.png'])
 
+T = [];
 for j = 1:2:length(Q)
     % transform data
     AHat = modeProduct(A,Q{j + 1}');
     
-    % store features
-    T = [];
-    for ii = [1,2,3,60,115,120]
-        figure(1); clf;
-        imagesc(AHat(:,:,ii)); colormap parula
-        T = cat(1,T,[ii,min(AHat(:,:,ii),[],'all'),max(AHat(:,:,ii),[],'all')]);
-        axis('off'); 
-        pbaspect([size(A,2) size(A,1) 1])
-        exportgraphics(gcf,[saveDir,'/',Q{j},'/img/feature_',num2str(ii),'.png'])
-    end
-
-    % store clims
-    T = array2table(T,'VariableNames',{'slice', 'clim_min', 'clim_max'});
-    writetable(T,[saveDir,'/',Q{j},'/feature_clim.csv'])
-
+    % store frobenius norm of transformed frontal slices
+    t = vecnorm(reshape(AHat,[],size(A,3)),2,1);
+    T = cat(2,T,t(:));
     
     % store approximations
     for i = 1:size(kpPairs,1)
@@ -180,10 +170,14 @@ for j = 1:2:length(Q)
         Ak      = projprod(U,projprod(S,tran(V),Qp),Qp);
 
         figure(1); clf;
-        imagesc(Ak(:,:,frame)); 
-        clim(cax)
+        imagesc(rescale(Ak(:,:,[R,G,B])));
         axis('off'); 
         pbaspect([size(A,2) size(A,1) 1])
-        exportgraphics(gcf,[saveDir,'/',Q{j},'/img/frame_',num2str(frame),'_k',num2str(kk),'_p',num2str(pp),'.png'])
+        exportgraphics(gcf,[saveDir,'/',Q{j},'/img/img_RGB_k',num2str(kk),'_p',num2str(pp),'.png'])
     end
 end
+
+T = [(1:n3)',T];
+T = array2table(T,'VariableNames',{'slice', 'I', 'C', 'Z', 'W'});
+writetable(T,[saveDir,'/transform_frobenius_norm.csv'])
+

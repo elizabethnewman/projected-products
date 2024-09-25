@@ -1,0 +1,158 @@
+
+
+
+\begin{tikzpicture}
+\Huge
+
+\pgfplotsset{/pgfplots/colormap={hot2}{
+[1cm]rgb255(0cm)=(0,0,0) rgb255(3cm)=(255,0,0)
+rgb255(6cm)=(255,255,0) rgb255(8cm)=(255,255,255)}}
+
+% CHOOSE DIRECTORY
+\def\myDir{../results_traffic}
+
+\def\h{6}
+\def\b{0.2}
+
+
+\node (n0) {\includegraphics[height=\h cm]{\myDir/I/RE.png}};
+\node[right=0.0cm of n0.east, anchor=west] (c0) {\pgfplotscolorbardrawstandalone[
+    colormap={example}{
+        samples of colormap=(4 of hot2)
+    },
+    colorbar,
+    colorbar style={ytick={0,0.5,1}},
+    point meta min=0,
+    point meta max=1, 
+%    colorbar horizontal,
+%    colormap access=const,
+]
+};
+
+\node[above=0.0cm of n0.north] (t0) {$\bfQ = \bfI_{:,1:p}$};
+
+\node at ($(n0.south west)+(-\b,1.5*\b)$) {\Large $120$};
+\node at ($(n0.north west)+(-\b,-1.5*\b)$) {\Large $1$};
+\draw[<->, line width=3pt, shorten <= 0.75cm, shorten >= 0.75cm] ($(n0.south west)+(-\b,0)$) -- ($(n0.north west)+(-\b,0)$); 
+\node[left=0.25cm of n0.west, anchor=east] {$p$};
+
+\node at ($(n0.south west)+(1.5*\b,-\b)$) {\Large $1$};
+\node at ($(n0.south east)+(-1*\b,-\b)$) {\Large $120$};
+\draw[<->, line width=3pt, shorten <= 0.75cm, shorten >= 0.75cm] ($(n0.south west)+(0,-\b)$) -- ($(n0.south east)+(0,-\b)$); 
+\node[below=0.25cm of n0.south, anchor=north] {$k$};
+
+
+\node[right=1cm of c0.east, anchor=west] (n1) {\includegraphics[height=\h cm]{\myDir/W/RE.png}};
+\node[right=0.0cm of n1.east, anchor=west] (c1) {\pgfplotscolorbardrawstandalone[
+    colormap={example}{
+        samples of colormap=(4 of hot2)
+    },
+    colorbar,
+    colorbar style={ytick={0,0.5,1}},
+    point meta min=0,
+    point meta max=1, 
+%    colorbar horizontal,
+%    colormap access=const,
+]
+};
+
+\node at (t0 -| n1) (t1) {$\bfQ = \bfW_{:,1:p}$};
+
+
+
+\node[right=1cm of c1.east, anchor=west] (n2) {\includegraphics[height=\h cm]{\myDir/C/RE.png}};
+\node[right=0.0cm of n2.east, anchor=west] (c2) {\pgfplotscolorbardrawstandalone[
+    colormap={example}{
+        samples of colormap=(4 of hot2)
+    },
+    colorbar,
+    colorbar style={ytick={0,0.13,0.25}},
+    point meta min=0,
+    point meta max=0.25, 
+%    colorbar horizontal,
+%    colormap access=const,
+]
+};
+
+% \node at (t1 -| n2) (t2) {$\bfQ = \bfC_{1:p,:}^\top$};
+\node[above=0.0cm of n2.north] (t2) {$\bfQ = \bfC_{1:p,:}^\top$};
+
+
+\node[right=1cm of c2.east, anchor=west] (n3) {\includegraphics[height=\h cm]{\myDir/Z/RE.png}};
+\node[right=0.0cm of n3.east, anchor=west] (c3) {\pgfplotscolorbardrawstandalone[
+    colormap={example}{
+        samples of colormap=(4 of hot2)
+    },
+    colorbar,
+    colorbar style={ytick={0,0.13,0.25}},
+    point meta min=0,
+    point meta max=0.25, 
+%    colorbar horizontal,
+%    colormap access=const,
+]
+};
+
+\node at (t2 -| n3) (t3) {$\bfQ = \bfU_3(:,1:p)$};
+
+
+\end{tikzpicture}
+
+
+
+% SAME SCALE is LESS INFORMATIVE
+
+%\begin{tikzpicture}
+%
+%\def\h{6}
+%
+%\node (n0) {\includegraphics[height=\h cm]{\myDir/I/RE_rescaled.png}};
+%\node[right=0.0cm of n0.east, anchor=west] (c0) {\pgfplotscolorbardrawstandalone[
+%    colormap={example}{
+%        samples of colormap=(4 of hot2)
+%    },
+%    point meta min=0,
+%    point meta max=1, 
+%%    colorbar horizontal,
+%%    colormap access=const,
+%]
+%};
+%
+%\node[right=1cm of c0.east, anchor=west] (n1) {\includegraphics[height=\h cm]{\myDir/W/RE_rescaled.png}};
+%\node[right=0.0cm of n1.east, anchor=west] (c1) {\pgfplotscolorbardrawstandalone[
+%    colormap={example}{
+%        samples of colormap=(4 of hot2)
+%    },
+%    point meta min=0,
+%    point meta max=1, 
+%%    colorbar horizontal,
+%%    colormap access=const,
+%]
+%};
+%
+%\node[right=1cm of c1.east, anchor=west] (n2) {\includegraphics[height=\h cm]{\myDir/C/RE_rescaled.png}};
+%\node[right=0.0cm of n2.east, anchor=west] (c2) {\pgfplotscolorbardrawstandalone[
+%    colormap={example}{
+%        samples of colormap=(4 of hot2)
+%    },
+%    point meta min=0,
+%    point meta max=1, 
+%%    colorbar horizontal,
+%%    colormap access=const,
+%]
+%};
+%
+%
+%\node[right=1cm of c2.east, anchor=west] (n3) {\includegraphics[height=\h cm]{\myDir/Z/RE_rescaled.png}};
+%\node[right=0.0cm of n3.east, anchor=west] (c3) {\pgfplotscolorbardrawstandalone[
+%    colormap={example}{
+%        samples of colormap=(4 of hot2)
+%    },
+%    point meta min=0,
+%    point meta max=1, 
+%%    colorbar horizontal,
+%%    colormap access=const,
+%]
+%};
+%
+%\end{tikzpicture}
+

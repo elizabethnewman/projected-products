@@ -1,0 +1,10 @@
+*.DS_Store
+*.asv
+*~
+*.mat
+*.png
+*.csv
+*.log
+*.aux
+*.out
+*.synctex.gz

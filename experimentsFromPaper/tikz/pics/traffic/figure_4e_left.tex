@@ -1,0 +1,127 @@
+
+
+
+
+\begin{tikzpicture}
+
+
+% CHOOSE DIRECTORY
+\def\myDir{../results_traffic}
+
+\large
+
+% legend options
+\pgfplotsset{
+    compat=newest,
+    /pgfplots/legend image code/.code={%
+        \draw[mark repeat=5, mark phase=3,#1] 
+            plot coordinates {
+                (0cm,0cm) 
+                (0.3cm,0cm)
+                (0.6cm,0cm)
+                (0.9cm,0cm)
+                (1.2cm,0cm)%
+            };
+    },
+        % Global legend style
+    legend style={
+        at={(0.98, 0.02)},
+        anchor=south east,
+        legend columns=1,
+        /tikz/every even column/.append style={column sep=0.5cm},
+        font=\small
+
+    }
+}
+
+% https://copyprogramming.com/howto/filter-pgfplots-data-more-than-once-e-g-with-discard-if?utm_content=cmp-true
+
+% ad hoc approach: https://tex.stackexchange.com/questions/641588/filter-several-rows-in-addplot
+\pgfplotsset{
+    discard if/.style 2 args={
+        x filter/.append code={
+            \ifdim\thisrow{#1} pt=#2pt
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    },
+    discard if not/.style 2 args={
+        x filter/.append code={
+            \ifdim\thisrow{#1} pt=#2pt
+            \else
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    }
+}
+
+\def\lw{2.0}
+\def\ms{4}
+
+\pgfplotsset
+{
+m1/.style={color=mycolor1, line width=\lw pt, mark size=\ms pt, mark=o, mark options={solid, mycolor1}, mark repeat=5},
+m2/.style={color=mycolor2, line width=\lw pt, mark size=\ms pt, mark=o, mark options={solid, mycolor2, rotate=270}, mark repeat=1},
+m3/.style={color=mycolor4, line width=\lw pt, mark size=\ms pt, mark=o, mark options={solid, mycolor4, rotate=90}, mark repeat=1},
+m4/.style={color=mycolor5, line width=\lw pt, mark size=\ms pt, mark=o, mark options={solid, mycolor5}, mark repeat=1},
+m5/.style={color=black, dashed, line width=\lw pt, mark size=\ms pt, mark=x, mark options={solid, black}, mark repeat=1}
+}
+
+\begin{axis}[%
+scale only axis,
+width=10cm,
+height=7cm,
+at={(1.033in,0.719in)},
+scale only axis,
+axis x line=bottom, 
+axis y line=left, 
+axis line style={-}, 
+ tick align=outside, % Place ticks outside the plot area
+xmin=1,
+xmax=160,
+% xtick={0, 49, 99, 149, 199, 249},
+xmode=linear,
+% xticklabels={1, 50, 100, 150, 200, 250},
+scaled x ticks=false,
+xlabel={Truncation $k$},
+ymin=1e-4,
+ymax=1e0,
+% ytick={1e-1, 0.3162, 1e0},
+ylabel={Relative Error $\frac{\|\TA -\widetilde{\TA}\|_F}{\|\TA\|_F}$},
+ymode=log,
+xmajorgrids,
+ymajorgrids,
+    grid style={line width=1pt, draw=gray!10},
+    major grid style={line width=1pt,draw=gray!50},
+ legend cell align={left},
+ legend style={at={(axis cs:1,1)}, anchor=south, legend columns=1, legend transposed}, 
+%  legend entries={$\bfZ$, $\bfC$, $\bfW$, $\bfI$}
+]
+
+
+
+
+\foreach[count=\c from 1] \p in {10, 50, 100, 120}{
+
+\edef\temp{
+
+\noexpand \addplot [m\c, mark repeat=6] 
+	table [x index=0, y=rel_err, col sep=comma] {\myDir/Z/results_p\p.csv};
+}\temp
+	
+}
+
+\addplot [m5, mark repeat=5] table [x=k, y=rel_err, col sep=comma] {\myDir/matrix/results.csv};
+
+\node[anchor=west, draw=black, fill=mycolor1!50] at (122, 0.122194933) {\scriptsize $p=10$};
+\node[anchor=west, draw=black, fill=mycolor2!50] at (122,0.0603) {\scriptsize $p=50$};
+\node[anchor=north west, draw=black, fill=mycolor4!50] at (105,1.25e-2) {\scriptsize $p=100$};
+\node[anchor=south east, draw=black, fill=mycolor5!50] at (100,1e-3) {\scriptsize $p=n_3=120$};
+\node[anchor=south west, draw=black, fill=black!75] at (140,1.5e-2) {\scriptsize \color{white} matrix};
+
+
+
+\end{axis}
+
+
+\end{tikzpicture}

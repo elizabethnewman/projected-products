@@ -1,0 +1,13 @@
+
+\pgfplotsset{/pgfplots/colormap={hot2}{[1cm]rgb255(0cm)=(0,0,0) rgb255(3cm)=(255,0,0)
+rgb255(6cm)=(255,255,0) rgb255(8cm)=(255,255,255)}}
+
+\pgfplotscolorbardrawstandalone[
+    colormap={example}{
+        samples of colormap=(4 of hot2)
+    },
+    point meta min=0,
+    point meta max=1,
+%    colorbar horizontal,
+%    colormap access=const,
+]

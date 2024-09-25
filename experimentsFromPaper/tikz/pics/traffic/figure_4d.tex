@@ -1,0 +1,196 @@
+\begin{tikzpicture}
+
+% CHOOSE DIRECTORY
+\def\myDir{../results_traffic}
+
+\def\w{3}
+\def\s{0.05}
+
+
+
+\def\myname{I}
+\foreach[count=\b from 1] \i in {1, 2, 3, 60, 115, 120}{
+	\ifthenelse{\b < 2}{
+				\node (\myname\b) {\includegraphics[width=\w cm]{\myDir/\myname/img/feature_\i.png}};
+			}{
+				\pgfmathsetmacro{\c}{int(\b - 1)}
+				\node[right=-0.25cm of \myname\c.east, anchor=west] (\myname\b) {\includegraphics[width=\w cm]{\myDir/\myname/img/feature_\i.png}};
+			}
+			
+			\node[above=0.0cm of \myname\b.north] {slice $\i$};
+}
+
+\node[rotate=90, above=0.0cm of \myname1.west] {$\bfQ = \bfI$};
+
+
+\def\myname{W}
+\foreach[count=\b from 1] \i in {1, 2, 3, 60, 115, 120}{
+	\ifthenelse{\b < 2}{
+				\node[below=-0.25cm of I1.south, anchor=north] (\myname\b) {\includegraphics[width=\w cm]{\myDir/\myname/img/feature_\i.png}};
+			}{
+				\pgfmathsetmacro{\c}{int(\b - 1)}
+				\node[right=-0.25cm of \myname\c.east, anchor=west] (\myname\b) {\includegraphics[width=\w cm]{\myDir/\myname/img/feature_\i.png}};
+			}
+}
+
+\node[rotate=90, above=0.0cm of \myname1.west] {$\bfQ = \bfW$};
+
+
+\def\myname{C}
+\foreach[count=\b from 1] \i in {1, 2, 3, 60, 115, 120}{
+	\ifthenelse{\b < 2}{
+				\node[below=-0.25cm of W1.south, anchor=north] (\myname\b) {\includegraphics[width=\w cm]{\myDir/\myname/img/feature_\i.png}};
+			}{
+				\pgfmathsetmacro{\c}{int(\b - 1)}
+				\node[right=-0.25cm of \myname\c.east, anchor=west] (\myname\b) {\includegraphics[width=\w cm]{\myDir/\myname/img/feature_\i.png}};
+			}
+}
+
+\node[rotate=90, above=0.0cm of \myname1.west] {$\bfQ = \bfC^\top$};
+
+\def\myname{Z}
+\foreach[count=\b from 1] \i in {1, 2, 3, 60, 115, 120}{
+	\ifthenelse{\b < 2}{
+				\node[below=-0.25cm of C1.south, anchor=north] (\myname\b) {\includegraphics[width=\w cm]{\myDir/\myname/img/feature_\i.png}};
+			}{
+				\pgfmathsetmacro{\c}{int(\b - 1)}
+				\node[right=-0.25cm of \myname\c.east, anchor=west] (\myname\b) {\includegraphics[width=\w cm]{\myDir/\myname/img/feature_\i.png}};
+			}
+}
+
+\node[rotate=90, above=0.0cm of \myname1.west] {$\bfQ = \bfU_3$};
+
+
+\end{tikzpicture}
+
+
+
+%\begin{tikzpicture}
+%
+%
+%% CHOOSE DIRECTORY
+%\def\myDir{results/traffic}
+%
+%\large
+%
+%
+%% legend options
+%\pgfplotsset{
+%    compat=newest,
+%    /pgfplots/legend image code/.code={%
+%        \draw[mark repeat=5,mark phase=3,#1] 
+%            plot coordinates {
+%                (0cm,0cm) 
+%                (0.3cm,0cm)
+%                (0.6cm,0cm)
+%                (0.9cm,0cm)
+%                (1.2cm,0cm)%
+%            };
+%    },
+%        % Global legend style
+%    legend style={
+%        at={(0.98, 0.02)},
+%        anchor=south east,
+%        legend columns=1,
+%        /tikz/every even column/.append style={column sep=0.5cm},
+%        font=\small
+%
+%    }
+%}
+%
+%% https://copyprogramming.com/howto/filter-pgfplots-data-more-than-once-e-g-with-discard-if?utm_content=cmp-true
+%
+%% ad hoc approach: https://tex.stackexchange.com/questions/641588/filter-several-rows-in-addplot
+%\pgfplotsset{
+%    discard if/.style 2 args={
+%        x filter/.append code={
+%            \ifdim\thisrow{#1} pt=#2pt
+%                \def\pgfmathresult{inf}
+%            \fi
+%        }
+%    },
+%    discard if not/.style 2 args={
+%        x filter/.append code={
+%            \ifdim\thisrow{#1} pt=#2pt
+%            \else
+%                \def\pgfmathresult{inf}
+%            \fi
+%        }
+%    }
+%}
+%
+%\def\lw{2.0}
+%\def\ms{6}
+%
+%\pgfplotsset
+%{
+%m1/.style={color=mycolor1, line width=\lw pt, mark size=\ms pt, mark=o, mark options={solid, mycolor1}, mark repeat=5, only marks},
+%m2/.style={color=mycolor2, line width=\lw pt, mark size=\ms pt, mark=triangle, mark options={solid, mycolor2, rotate=270}, mark repeat=1, only marks},
+%m3/.style={color=mycolor4, line width=\lw pt, mark size=\ms pt, mark=square, mark options={solid, mycolor4, rotate=90}, mark repeat=1, only marks},
+%m4/.style={color=mycolor5, line width=\lw pt, mark size=\ms pt, mark=diamond, mark options={solid, mycolor5}, mark repeat=1, only marks}
+%}
+%
+%
+%
+%\begin{axis}[%
+%scale only axis,
+%width=10cm,
+%height=7cm,
+%at={(1.033in,0.719in)},
+%scale only axis,
+%axis x line=bottom, 
+%axis y line=left, 
+%axis line style={-}, 
+% tick align=outside, % Place ticks outside the plot area
+%xmin=1,
+%xmax=120,
+%% xtick={1e-1, 0.3162, 1e0},
+%xmode=linear,
+%% xticklabels={1, 50, 100, 150, 200, 250},
+%scaled x ticks=false,
+%xlabel={Frontal Slice Index in Transform Domain},
+%ymin=-1e-2,
+%ymax=1e-2,
+%% ytick={1e-1, 0.3162, 1e0},
+%ylabel={Color Limits},
+%ymode=linear,
+%xmajorgrids,
+%ymajorgrids,
+%    grid style={line width=1pt, draw=gray!10},
+%    major grid style={line width=1pt,draw=gray!50},
+%% can do things to make legend look nice
+% legend cell align={left},
+% legend style={at={(axis cs:1,1)}, anchor=south, legend columns=1, legend transposed}, 
+%%  legend entries={$\bfZ$, $\bfC$, $\bfW$, $\bfI$}
+%]
+%
+%
+%
+%
+%\foreach[count=\c from 1] \M in {I, C, W, Z}{
+%
+%\edef\temp{
+%
+%\noexpand \addplot [m\c, mark repeat=5] 
+%	table [x=slice, y=clim_min, col sep=comma] {\myDir/\M/feature_clim.csv};
+%
+%}\temp
+%	
+%}
+%
+%\foreach[count=\c from 1] \M in {I, C, W, Z}{
+%
+%\edef\temp{
+%
+%\noexpand \addplot [m\c, mark repeat=5] 
+%	table [x=slice, y=clim_max, col sep=comma] {\myDir/\M/feature_clim.csv};
+%
+%}\temp
+%	
+%}
+%
+%\end{axis}
+%
+%
+%\end{tikzpicture}
+

@@ -1,0 +1,247 @@
+
+% packages
+\usepackage{amsmath, amsfonts} % basic math packages
+\usepackage{tikz, pgfplots, pgflibraryplotmarks, pgfkeys, ifthen} % for making illustrations
+\usetikzlibrary{shapes.arrows, arrows, decorations.markings}
+\usetikzlibrary{calc, positioning}
+\usepackage{graphicx} % for importing images
+\usepackage{xcolor} % more color options
+\usepackage{multicol} % for making two-column lists
+\usepackage{hyperref} % for hyperlinking
+%\hypersetup{colorlinks=true, urlcolor=cyan,}
+\usepackage{framed}
+\usepackage{cleveref}
+\usepackage{xfrac}
+\usepackage{mathabx}
+% \usepackage{graphicx}
+% \usepackage{tikz, pgfplots, pgflibraryplotmarks, pgfkeys, ifthen}
+% \usepackage{pgf-pie} 
+% \usetikzlibrary{calc}
+% \usepackage{amssymb, amsfonts, amsmath, latexsym, dsfont}
+% \usepackage{comment}
+% \usepackage{array}
+\pgfplotsset{compat = 1.3}
+% ============================================================ %
+% Macros
+% ============================================================ %
+%\newtheorem{example}[theorem]{Example}
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+
+
+
+\definecolor{EmoryBlue}{RGB}{1, 33, 105} 
+\definecolor{EmoryDarkBlue}{RGB}{12, 35, 64} 
+\definecolor{EmoryMediumBlue}{RGB}{0, 51, 160} 
+\definecolor{EmoryLightBlue}{RGB}{0, 125, 186} 
+\definecolor{EmoryYellow}{RGB}{242, 169, 0} 
+\definecolor{EmoryGold}{RGB}{181, 133, 0} 
+\definecolor{EmoryMetallicGold}{RGB}{132, 117, 78} 
+
+
+\definecolor{mycolor0}{rgb}{1, 1, 1}%
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
+\definecolor{mycolor4}{rgb}{0.49400,0.18400,0.55600}%
+\definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800}%
+\definecolor{mycolor6}{rgb}{0.30100,0.74500,0.93300}%
+
+\definecolor{jet1}{rgb}{0.0000,0.0000,0.6667}
+\definecolor{jet2}{rgb}{0.0000,0.0000,1.0000}
+\definecolor{jet3}{rgb}{0.0000,0.3333,1.0000}
+\definecolor{jet4}{rgb}{0.0000,0.6667,1.0000}
+\definecolor{jet5}{rgb}{0.0000,1.0000,1.0000}
+\definecolor{jet6}{rgb}{0.3333,1.0000,0.6667}
+\definecolor{jet7}{rgb}{0.6667,1.0000,0.3333}
+\definecolor{jet8}{rgb}{1.0000,1.0000,0.0000}
+\definecolor{jet9}{rgb}{1.0000,0.6667,0.0000}
+\definecolor{jet10}{rgb}{1.0000,0.3333,0.0000}
+\definecolor{jet11}{rgb}{1.0000,0.0000,0.0000}
+
+
+
+\definecolor{mygreen}{RGB}{111, 113, 88}
+
+\usepackage[most]{tcolorbox}
+\usepackage{cleveref}
+% \tcbuselibrary{theorems}
+
+
+\makeatletter
+%\crefname{tcb@cnt@mytheo}{theorem}{theorem}
+%\Crefname{tcb@cnt@mytheo}{Theorem}{Theorem}
+\crefformat{tcb@cnt@mytheo}{theorem~#2#1#3}
+\Crefformat{tcb@cnt@mytheo}{Theorem~#2#1#3}
+\crefformat{tcb@cnt@mylemma}{lemma~#2#1#3}
+\Crefformat{tcb@cnt@mylemma}{Lemma~#2#1#3}
+\crefformat{tcb@cnt@mycorollary}{corollary~#2#1#3}
+\Crefformat{tcb@cnt@mycorollary}{Corollary~#2#1#3}
+\crefformat{tcb@cnt@myproto}{prototype problem~#2#1#3}
+\Crefformat{tcb@cnt@myproto}{Prototype Problem~#2#1#3}
+\crefformat{tcb@cnt@myalg}{algorithm~#2#1#3}
+\Crefformat{tcb@cnt@myalg}{Algorithm~#2#1#3}
+\crefformat{tcb@cnt@myexam}{example~#2#1#3}
+\Crefformat{tcb@cnt@myexam}{Example~#2#1#3}
+%\crefname{tcb@cnt@mylemma}{lemma}{Lemma}
+%\Crefname{tcb@cnt@mylemma}{lemma}{Lemma}
+\makeatother
+
+
+\newtcbtheorem[auto counter, number within=section]{mytheo}{Theorem}%
+{colback=EmoryBlue!5,colframe=EmoryBlue, fonttitle=\bfseries}{thm}
+
+\newtcbtheorem[auto counter, number within=section]{mylemma}{Lemma}%
+{colback=gray!5,colframe=gray, fonttitle=\bfseries}{lem}
+
+\newtcbtheorem[auto counter, number within=section]{mycorollary}{Corollary}%
+{colback=gray!5,colframe=gray, fonttitle=\bfseries}{cor}
+
+\newtcbtheorem[auto counter, number within=section]{myalg}{Algorithm}%
+{colback=white!5,colframe=black, fonttitle=\bfseries}{alg}
+
+\newtcbtheorem[auto counter, number within=section]{myexam}{Example}%
+{colback=white!5,colframe=EmoryGold, fonttitle=\bfseries}{exam}
+
+\usepackage{xcolor}
+\usepackage{amsthm}
+\usepackage{framed}
+
+\theoremstyle{plain}% default
+
+\theoremstyle{definition}
+\newtheorem{protoactionitems}{Action Items}[section]
+\newenvironment{actionitems}
+   {\colorlet{shadecolor}{lightgray!50}\begin{shaded}\begin{protoactionitems}}
+   {\end{protoactionitems}\end{shaded}}
+
+
+\newcommand{\powerset}[1]{\rho(#1)}
+
+
+\newcommand{\eqdef}{\mathrel{\mathop:}=}
+\newcommand{\starM}{\star_{\bfM}}
+\newcommand{\starQ}{\star_{\bfQ^H}'}
+\newcommand{\starQperp}{\star_{\bfQ_{\perp}^H}'}
+%\newcommand{\starQ}{\star_{\bfQ}'}
+%\newcommand{\starQperp}{\star_{\bfQ_{\perp}}'}
+\newcommand{\starMP}{\star_{\bfM}^\dagger}
+
+
+% additional operators
+\DeclareMathOperator*{\trace}{trace}
+\DeclareMathOperator*{\rank}{rank}
+\DeclareMathOperator*{\diag}{diag}
+\DeclareMathOperator*{\argmax}{arg\ max}
+\DeclareMathOperator*{\argmin}{arg\ min}
+\DeclareMathOperator{\trank}{\starM-rank}
+\DeclareMathOperator*{\subjectto}{s.t.}
+\DeclareMathOperator{\projtrank}{\starQ-rank}
+\DeclareMathOperator{\projtrankperp}{\starQperp-rank}
+\DeclareMathOperator*{\myStore}{stored}
+\DeclareMathOperator*{\myValue}{value}
+\DeclareMathOperator*{\myVec}{vec}
+\DeclareMathOperator{\myFold}{fold}
+\DeclareMathOperator{\mySqueeze}{squeeze}
+\DeclareMathOperator{\myFloat}{float}
+\DeclareMathOperator{\myCol}{col}
+\DeclareMathOperator{\myNull}{null}
+\DeclareMathOperator{\mySpan}{span}
+\DeclareMathOperator{\Stiefel}{St}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\myVar}{var}
+\DeclareMathOperator*{\myBdiag}{bdiag}
+
+
+
+
+% colors
+\newcommand{\red}[1]{{\color{red} #1}}
+\newcommand{\blue}[1]{{\color{blue} #1}}
+\newcommand{\black}[1]{{\color{black} #1}}
+\newcommand{\cyan}[1]{{\color{cyan} #1}}
+\newcommand{\magenta}[1]{{\color{magenta} #1}}
+\newcommand{\white}[1]{{\color{white} #1}}
+
+% MATLAB DEFAULT COLORS
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
+\definecolor{mycolor4}{rgb}{0.49400,0.18400,0.55600}%
+\definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800}%
+\definecolor{mycolor6}{rgb}{0.30100,0.74500,0.93300}%
+
+\newcommand{\question}[1]{\textnormal{\blue{#1}}}
+\newcommand{\answer}[1]{\textnormal{\magenta{#1}}}
+
+% math symbols for vectors and matrices
+\def\mydefb#1{\expandafter\def\csname bf#1\endcsname{\mathbf{#1}}}
+\def\mydefallb#1{\ifx#1\mydefallb\else\mydefb#1\expandafter\mydefallb\fi}
+\mydefallb aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ\mydefallb
+
+% mathbb symbols for real numbers, integers, etc.
+\def\mydefb#1{\expandafter\def\csname #1bb\endcsname{\mathbb{#1}}}
+\def\mydefallb#1{\ifx#1\mydefallb\else\mydefb#1\expandafter\mydefallb\fi}
+\mydefallb aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ\mydefallb
+
+% mathcal symbols for script letters 
+\def\mydefb#1{\expandafter\def\csname #1cal\endcsname{\mathcal{#1}}}
+\def\mydefallb#1{\ifx#1\mydefallb\else\mydefb#1\expandafter\mydefallb\fi}
+\mydefallb aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ\mydefallb
+
+% mathbold symbols for tensors letters 
+\def\mydefb#1{\expandafter\def\csname T#1\endcsname{\boldsymbol{\mathcal{#1}}}}
+\def\mydefallb#1{\ifx#1\mydefallb\else\mydefb#1\expandafter\mydefallb\fi}
+\mydefallb aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ\mydefallb
+
+% math bold font for greek letters
+\def\mydefgreek#1{\expandafter\def\csname bf#1\endcsname{\text{\boldmath$\mathbf{\csname #1\endcsname}$}}}
+\def\mydefallgreek#1{\ifx\mydefallgreek#1\else\mydefgreek{#1}%
+   \lowercase{\mydefgreek{#1}}\expandafter\mydefallgreek\fi}
+\mydefallgreek {alpha}{Alpha}{beta}{Beta}{gamma}{Gamma}{delta}{Delta}{epsilon}{Epsilon}{zeta}{Zeta}{eta}{Eta}{theta}{Theta}{iota}{Iota}{kappa}{Kappa}{lambda}{Lambda}{mu}{Mu}{nu}{Nu}{omicron}{Omicron}{pi}{Pi}{rho}{Rho}{sigma}{Sigma}{tau}{Tau}{upsilon}{Upsilon}{phi}{Phi}{xi}{Xi}{chi}{Chi}{psi}{Psi}{omega}{Omega}\mydefallgreek
+
+
+% commenting commmands
+\newcommand{\liznote}[1]{{\color{blue}Liz: #1}}
+\newcommand{\myQuestion}[1]{{\color{black}{\bf Question:} #1}}
+\newcommand{\myAnswer}[1]{{\color{black} {\bf Answer:} #1}}
+ % \usepackage{subfigure}
+% \captionsetup[subfigure]{labelformat=simple}
+\usepackage{subcaption}
+% \usepackage{enumitem}
+%\newlist{todolist}{itemize}{2}
+%\setlist[todolist]{label=$\square$}
+
+
+\definecolor{purple1}{RGB}{135, 225, 0} 
+\definecolor{purple2}{RGB}{193, 252, 129} 
+\definecolor{purple3}{RGB}{228, 244, 210} 
+
+\definecolor{teal1}{RGB}{80, 227, 194} 
+\definecolor{teal2}{RGB}{167, 246, 228} 
+\definecolor{teal3}{RGB}{221, 247, 239} 
+
+
+\definecolor{green1}{RGB}{234, 140, 229} 
+\definecolor{green2}{RGB}{235, 177, 237} 
+\definecolor{green3}{RGB}{246, 222, 244} 
+
+
+\newcommand{\tube}[5]{
+\def\xx{#1}
+\def\yy{#2}
+\def\w{#3}
+\def\d{#4}
+\def\c{#5}
+
+% side
+\fill[fill=\c] 	(\xx,\yy+\w) -- (\xx+\d,\yy+\w+\d) --  (\xx+\w+\d,\yy+\w+\d) --  (\xx + \w,\yy+\w) -- cycle;
+\draw 	(\xx,\yy+\w) -- (\xx+\d,\yy+\w+\d) --  (\xx+\w+\d,\yy+\w+\d) --  (\xx + \w,\yy+\w);
+		
+% top
+\fill[fill=\c!50] 	(\xx+\w,\yy+\w) -- (\xx+\w+\d,\yy+\w+\d) --  (\xx+\w+\d,\yy+\d) --  (\xx + \w,\yy) -- cycle;
+\draw 		(\xx+\w,\yy+\w) -- (\xx+\w+\d,\yy+\w+\d) --  (\xx+\w+\d,\yy+\d) --  (\xx + \w,\yy);
+
+% front		
+\draw[fill=\c!75] (\xx,\yy) rectangle (\xx+\w,\yy+\w);
+}

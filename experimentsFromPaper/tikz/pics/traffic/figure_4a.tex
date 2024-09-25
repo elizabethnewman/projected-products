@@ -1,0 +1,198 @@
+
+\begin{tikzpicture}
+
+
+% CHOOSE DIRECTORY
+\def\myDir{../results_traffic}
+
+\large
+
+
+% legend options
+\pgfplotsset{
+    compat=newest,
+    /pgfplots/legend image code/.code={%
+        \draw[mark repeat=5,mark phase=3,#1] 
+            plot coordinates {
+                (0cm,0cm) 
+                (0.3cm,0cm)
+                (0.6cm,0cm)
+                (0.9cm,0cm)
+                (1.2cm,0cm)%
+            };
+    },
+        % Global legend style
+    legend style={
+        at={(0.98, 0.02)},
+        anchor=south east,
+        legend columns=1,
+        /tikz/every even column/.append style={column sep=0.5cm},
+        font=\small
+
+    }
+}
+
+% https://copyprogramming.com/howto/filter-pgfplots-data-more-than-once-e-g-with-discard-if?utm_content=cmp-true
+
+% ad hoc approach: https://tex.stackexchange.com/questions/641588/filter-several-rows-in-addplot
+\pgfplotsset{
+    discard if/.style 2 args={
+        x filter/.append code={
+            \ifdim\thisrow{#1} pt=#2pt
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    },
+    discard if not/.style 2 args={
+        x filter/.append code={
+            \ifdim\thisrow{#1} pt=#2pt
+            \else
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    }
+}
+
+\def\lw{2.0}
+\def\ms{6}
+
+\pgfplotsset
+{
+m1/.style={color=mycolor1, line width=\lw pt, mark size=\ms pt, mark=o, mark options={solid, mycolor1}, mark repeat=5},
+m2/.style={color=mycolor2, line width=\lw pt, mark size=\ms pt, mark=triangle, mark options={solid, mycolor2, rotate=270}, mark repeat=1},
+m3/.style={color=mycolor4, line width=\lw pt, mark size=\ms pt, mark=square, mark options={solid, mycolor4, rotate=90}, mark repeat=1},
+m4/.style={color=mycolor5, line width=\lw pt, mark size=\ms pt, mark=diamond, mark options={solid, mycolor5}, mark repeat=1}
+}
+
+\begin{axis}[%
+scale only axis,
+width=10cm,
+height=7cm,
+at={(1.033in,0.719in)},
+scale only axis,
+axis x line=bottom, 
+axis y line=left, 
+axis line style={-}, 
+ tick align=outside, % Place ticks outside the plot area
+xmin=1,
+xmax=125,
+% xtick={0, 49, 99, 149, 199, 249},
+xmode=linear,
+% xticklabels={1, 50, 100, 150, 200, 250},
+scaled x ticks=false,
+xlabel={Projection Dimension $p$},
+ymin=1e-1,
+ymax=1e0,
+ytick={1e-1, 0.3162, 1e0},
+ylabel={Relative Error $\frac{\|\TA -\TA_k(\bfQ)\|_F}{\|\TA\|_F}$},
+ymode=log,
+xmajorgrids,
+ymajorgrids,
+    grid style={line width=1pt, draw=gray!10},
+    major grid style={line width=1pt,draw=gray!50},
+% can do things to make legend look nice
+%legend cell align={left},
+%legend style={at={(axis cs:1,1)}, anchor=south, legend columns=1, legend transposed}, 
+  legend cell align={left},
+ legend style={at={(axis cs:1,0.3162)}, anchor=south west, legend columns=1, legend transposed, row sep=3pt}, 
+legend entries={$\bfQ = \bfI_{:,1:p}$,  $\bfQ = \bfW_{:,1:p}$, $\bfQ = \bfC_{1:p,:}^\top$, ${\bfQ = \bfU_3(:,1:p)}$}
+% legend entries={$\bfZ$, $\bfC$, $\bfW$, $\bfI$}
+]
+
+
+
+
+\foreach[count=\c from 1] \M in {Z, C, W, I}{
+
+\edef\temp{
+
+%\noexpand \addplot [color=mycolor\c, line width=\lw pt, mark size=3pt, mark=*, mark options={solid, fill=mycolor\c, draw=black, line width=0.5pt}, mark repeat=5, discard if not={k}{5}] 
+%	table [x=p, y=rel_err, col sep=comma] {results_traffic/traffic_\M.csv};
+
+\noexpand \addplot [m\c, mark repeat=5] 
+	table [x=p, y=rel_err, col sep=comma] {\myDir/\M/results_k5.csv};
+
+}\temp
+	
+}
+
+
+
+
+%
+%\node[draw, fill=white] at (2e-4,0.5e0) {\small $p=n_3$};
+%
+%\node[draw, fill=white] at (4e-1,5e3) {\small $p=1$};
+
+\end{axis}
+
+
+\end{tikzpicture}
+
+
+
+
+
+%\begin{axis}[%
+%scale only axis,
+%width=10cm,
+%height=7cm,
+%at={(1.033in,0.719in)},
+%scale only axis,
+%axis x line=bottom, 
+%axis y line=left, 
+%axis line style={-}, 
+% tick align=outside, % Place ticks outside the plot area
+%xmin=1e-1,
+%xmax=1e0,
+%xtick={1e-1, 0.3162, 1e0},
+%xmode=log,
+%% xticklabels={1, 50, 100, 150, 200, 250},
+%scaled x ticks=false,
+%xlabel={Relative Error $\frac{\|\TA -\TA_k\|_F}{\|\TA\|_F}$},
+%ymin=1e0,
+%ymax=1e4,
+%% ytick={1e-1, 0.3162, 1e0},
+%ylabel={Compression Ratio $\frac{\texttt{st}[\TA]}{\texttt{st}[\TA_k]}$},
+%ymode=log,
+%xmajorgrids,
+%ymajorgrids,
+%    grid style={line width=1pt, draw=gray!10},
+%    major grid style={line width=1pt,draw=gray!50},
+%% can do things to make legend look nice
+% legend cell align={left},
+% legend style={at={(axis cs:1,1)}, anchor=south, legend columns=1, legend transposed}, 
+%%  legend entries={$\bfZ$, $\bfC$, $\bfW$, $\bfI$}
+%]
+%
+%
+%
+%
+%\foreach[count=\c from 1] \M in {Z, C, W, I}{
+%
+%\edef\temp{
+%
+%%\noexpand \addplot [color=mycolor\c, line width=\lw pt, mark size=3pt, mark=*, mark options={solid, fill=mycolor\c, draw=black, line width=0.5pt}, mark repeat=5, discard if not={k}{5}] 
+%%	table [x=p, y=rel_err, col sep=comma] {results_traffic/traffic_\M.csv};
+%
+%\noexpand \addplot [m\c, discard if not={k}{5}, mark repeat=5] 
+%	table [x=rel_err, y=rel_comp_ratio, col sep=comma] {results_traffic/traffic_\M.csv};
+%
+%}\temp
+%	
+%}
+%
+%
+%
+%
+%%
+%%\node[draw, fill=white] at (2e-4,0.5e0) {\small $p=n_3$};
+%%
+%%\node[draw, fill=white] at (4e-1,5e3) {\small $p=1$};
+%
+%\end{axis}
+%
+%
+%\end{tikzpicture}
+%
+%

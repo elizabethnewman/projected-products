@@ -1,0 +1,112 @@
+
+
+\documentclass[border={0.25cm, 0.25cm, 0.25cm, 0.25cm}]{standalone}
+
+\input{macros}
+
+
+% \usepackage{breqn}  
+\usepackage{graphicx}
+\usepackage{tikz, pgfplots, pgflibraryplotmarks, pgfkeys, ifthen}
+\usetikzlibrary{calc}
+\usepackage{amssymb, amsfonts, amsmath, latexsym, dsfont}
+\usepackage{comment}
+\usepackage{array}
+\pgfplotsset{compat = 1.3}
+
+\usepgfplotslibrary{groupplots} % For multiple aligned plots
+\usepgfplotslibrary{fillbetween} % For filling between plots
+
+%\usepgfplotslibrary{external} 
+%\tikzexternalize
+
+% \usepackage{pgfplotstable}
+%\usepackage{pgfplotstable}
+%\pgfplotstabletranspose[colnames from=Pivot, input colnames
+%to=Pivot]{\ByColTbl}{\ByRowTbl}
+
+\definecolor{mycolor0}{rgb}{1, 1, 1}%
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
+\definecolor{mycolor4}{rgb}{0.49400,0.18400,0.55600}%
+\definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800}%
+\definecolor{mycolor6}{rgb}{0.30100,0.74500,0.93300}%
+
+\definecolor{tmpcolor1}{RGB}{255, 246, 222}
+
+\definecolor{myred}{HTML}{ED1B23}
+\definecolor{mygreen}{HTML}{009B55}
+\definecolor{myblue}{HTML}{2D2F92}
+
+\definecolor{jet1}{rgb}{0.0000,0.0000,0.6667}
+\definecolor{jet2}{rgb}{0.0000,0.0000,1.0000}
+\definecolor{jet3}{rgb}{0.0000,0.3333,1.0000}
+\definecolor{jet4}{rgb}{0.0000,0.6667,1.0000}
+\definecolor{jet5}{rgb}{0.0000,1.0000,1.0000}
+\definecolor{jet6}{rgb}{0.3333,1.0000,0.6667}
+\definecolor{jet7}{rgb}{0.6667,1.0000,0.3333}
+\definecolor{jet8}{rgb}{1.0000,1.0000,0.0000}
+\definecolor{jet9}{rgb}{1.0000,0.6667,0.0000}
+\definecolor{jet10}{rgb}{1.0000,0.3333,0.0000}
+\definecolor{jet11}{rgb}{1.0000,0.0000,0.0000}
+
+\tikzset{
+  double arrow/.style args={#1 colored by #2 and #3}{
+    -stealth,line width=#1,#2, % first arrow
+    postaction={draw,-stealth,#3,line width=(#1)/3,
+                shorten <=(#1)/3,shorten >=2*(#1)/3}, % second arrow
+  }
+}
+
+\begin{document}
+
+% TRAFFIC
+% \input{pics/traffic/figure_4a.tex}  
+% \input{pics/traffic/figure_4b.tex}
+% \input{pics/traffic/figure_4c.tex}
+% \input{pics/traffic/figure_4d.tex}
+% \input{pics/traffic/figure_4e_left.tex}
+% \input{pics/traffic/figure_4e_right.tex}
+
+% \input{pics/traffic/traffic_video}
+
+
+% SHUTTLE
+% \input{pics/shuttle/shuttle_relative_error_per_matrix.tex}
+%  \input{pics/shuttle/shuttle_relative_error_comp_ratio_per_matrix.tex}
+% \input{pics/shuttle/shuttle_Z_vs_matrix_relative_error.tex}
+% \input{pics/shuttle/shuttle_Z_vs_matrix_relative_error_comp_ratio.tex}
+% \input{pics/shuttle/shuttle_mode3_singular_value_decay.tex}
+% \input{pics/shuttle/shuttle_relative_error_all_k_p.tex}
+% \input{pics/shuttle/shuttle_relative_error_all_k_p_horizontal.tex}
+% \input{pics/shuttle/shuttle_example_frames.tex}
+% \input{pics/shuttle/shuttle_example_features.tex}
+% \input{pics/shuttle/shuttle_video}
+
+
+% HYPERSPECTRAL
+% \input{pics/hyperspectral/hyperspectral_example_frames.tex}
+% \input{pics/hyperspectral/hyperspectral_mode3_singular_value_decay.tex}
+% \input{pics/hyperspectral/hyperspectral_relative_error_all_k_p_horizontal.tex}
+% \input{pics/hyperspectral/hyperspectral_relative_error_all_k_p.tex}
+% \input{pics/hyperspectral/hyperspectral_relative_error_per_matrix.tex}
+% \input{pics/hyperspectral/hyperspectral_relative_error_comp_ratio_per_matrix.tex}
+% \input{pics/hyperspectral/hyperspectral_Z_vs_matrix_relative_error}
+% \input{pics/hyperspectral/hyperspectral_Z_vs_matrix_relative_error_comp_ratio}
+% \input{pics/hyperspectral/hyperspectral_frobenius_norm}
+
+% HYPERSPECTRAL - SVDII
+% \input{pics/hyperspectral_svdII/hyperspectral_cube.tex}
+% \input{pics/hyperspectral_svdII/hyperspectral_data.tex}
+% \input{pics/hyperspectral_svdII/hyperspectral_indianPines_err_vs_compression.tex}
+% \input{pics/hyperspectral_svdII/hyperspectral_indianPines_err_vs_compression_transpose.tex}
+% \input{pics/hyperspectral_svdII/hyperspectral_indianPines_err_vs_truncation.tex}
+% \input{pics/hyperspectral_svdII/hyperspectral_indianPines_err_vs_truncation_transpose.tex}
+% \input{pics/hyperspectral_svdII/tsvdII_vs_hosvd.tex}
+% \input{pics/hyperspectral_svdII/hyperspectral_legend_truncation}
+% \input{pics/hyperspectral_svdII/hyperspectral_legend_svdII_truncation}
+% \input{pics/hyperspectral_svdII/hyperspectral_legend_svdII_projection}
+
+\end{document}
+
