@@ -1,4 +1,4 @@
-## Experiments from Paper
+# Experiments from Paper
 
 This folder contains the following scripts to reproduce the results from the paper:
 
