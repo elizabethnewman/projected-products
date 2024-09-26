@@ -11,13 +11,13 @@ p  = 1;
 I = eye(n3);
 H = 1 / sqrt(2) * [1, 1; 1, -1];
 
-Q = {'I', I, 'H', H'};
+Q = {'U_3(:,1)', I, 'H(1,:)^T', H'};
 
 for i = 1:2:length(Q)
     Qp      = Q{i+1}(:,1:p);
     [U,S,V] = projsvd(A,Qp,k);
     Ak      = projprod(U,projprod(S,tran(V),Qp),Qp);
     
-    err = fronorm(A - Ak);
-    fprintf('||A - A_k(%s)||_F = %0.4f\n',Q{i},err)
+    err = fronorm(A - Ak)^2;
+    fprintf('||A - A_1(%s)||_F^2 = %0.4f\n',Q{i},err)
 end
