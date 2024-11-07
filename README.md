@@ -31,7 +31,15 @@ C = projprod(A, B, Q);
 
 # Citation
 ```console
-TBD
+@misc{keegan2024projectedtensortensorproductsefficient,
+      title={Projected Tensor-Tensor Products for Efficient Computation of Optimal Multiway Data Representations}, 
+      author={Katherine Keegan and Elizabeth Newman},
+      year={2024},
+      eprint={2409.19402},
+      archivePrefix={arXiv},
+      primaryClass={math.NA},
+      url={https://arxiv.org/abs/2409.19402}, 
+}
 ```
 
 The scripts to reproduce the results from the paper are available in the [experimentsFromPaper](https://github.com/elizabethnewman/projected-products/tree/main/experimentsFromPaper) directory.
