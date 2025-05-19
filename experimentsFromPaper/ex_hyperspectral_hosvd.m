@@ -76,23 +76,26 @@ gammas  = zeros(size(results));
 AHat             = modeProduct(A,Q');
 [UHat,SHat,VHat] = facewiseSVD(AHat);
 
-for p = 1:size(A,3)
-    disp(['Starting p = ', num2str(p),'...'])
+for k = 1:kmax
+    disp(['Starting k = ', num2str(k),'...'])
+
+    % form approximation
     AApproxHat = facewise(UHat(:,1:k,:),facewise(SHat(1:k,1:k,:),tran(VHat(:,1:k,:))));
 
-    for k = 1:kmax
+    for p = 1:size(A,3)
+
         % get energy
         gamma      = fronorm(AApproxHat(:,:,1:p))^2 / fronorm(modeProduct(A,Q(:,1:p)'))^2;
         
         % re-compute projected tsvdII to avoid errors
-        [u,s,v,info] = projsvdII(A,gamma,Q);
+        [u,s,v,info] = projsvdII(A,gamma,Q(:,1:p));
         
         % compute approximation
-        AApprox = projprod(u,projprod(s,tran(v),Q),Q);
+        AApprox = projprod(u,projprod(s,tran(v),Q(:,1:p)),Q(:,1:p));
         
         % store results
         results(k,p) = fronorm(A - AApprox);
-        storage(k,p) = sum(info.rho) * (size(A,1) + size(A,2)) + size(A,3) * p;
+        storage(k,p) = sum(info.rho(1:p)) * (size(A,1) + size(A,2)) + size(A,3) * p;
         gammas(k,p)  = gamma;
     end
     disp(['Finished p = ', num2str(p),'.'])

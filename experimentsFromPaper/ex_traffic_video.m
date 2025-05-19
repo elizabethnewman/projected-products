@@ -22,6 +22,7 @@ if ~exist([saveDir,'orig'], 'dir'), mkdir([saveDir,'orig']); end
 nrmA        = fronorm(A);
 storeA      = n1 * n2 * n3;
 
+
 %% form data-dependent transformation
 [Z,S,~] = svd(modeUnfold(A,3),'econ');
 

@@ -1,7 +1,11 @@
-function[U,S,V,info] = projsvdII(A, gamma, Q)
+function[U,S,V,info] = projsvdII(A, gamma, Q, varargin)
 
 if nargin == 0, runMinimalExample(); return; end
 if ~exist('gamma','var'), gamma = 1; end
+
+% parse arguments
+for k = 1:2:length(varargin), eval([varargin{k}, ' = varargin{k + 1};']); end
+if ~exist('tau','var'), tau = 1e-14; end % slack variable
 
 % compute tsvd, but stay in transform domain
 AHat             = modeProduct(A,Q');
@@ -15,7 +19,7 @@ nrmSHat2 = norm(s,'fro')^2;
 [v,idx] = sort(s(:).^2,'descend');
 
 % find truncation
-cutoff = find(cumsum(v) / nrmSHat2 > gamma,1);
+cutoff = find(cumsum(v) / nrmSHat2 > gamma - tau,1);
 
 % truncate (a loop might be more efficient in terms of storage)
 s(idx(cutoff + 1:end)) = 0;

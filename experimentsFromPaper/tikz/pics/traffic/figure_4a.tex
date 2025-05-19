@@ -58,10 +58,10 @@
 
 \pgfplotsset
 {
-m1/.style={color=mycolor1, line width=\lw pt, mark size=\ms pt, mark=o, mark options={solid, mycolor1}, mark repeat=5},
-m2/.style={color=mycolor2, line width=\lw pt, mark size=\ms pt, mark=triangle, mark options={solid, mycolor2, rotate=270}, mark repeat=1},
-m3/.style={color=mycolor4, line width=\lw pt, mark size=\ms pt, mark=square, mark options={solid, mycolor4, rotate=90}, mark repeat=1},
-m4/.style={color=mycolor5, line width=\lw pt, mark size=\ms pt, mark=diamond, mark options={solid, mycolor5}, mark repeat=1}
+m4/.style={color=mycolor1, line width=\lw pt, mark size=\ms pt, mark=o, mark options={solid, mycolor1}, mark repeat=5},
+m3/.style={color=mycolor2, line width=\lw pt, mark size=\ms pt, mark=triangle, mark options={solid, mycolor2, rotate=270}, mark repeat=1},
+m1/.style={color=mycolor4, line width=\lw pt, mark size=\ms pt, mark=square, mark options={solid, mycolor4, rotate=90}, mark repeat=1},
+m2/.style={color=mycolor5, line width=\lw pt, mark size=\ms pt, mark=diamond, mark options={solid, mycolor5}, mark repeat=1}
 }
 
 \begin{axis}[%
@@ -102,7 +102,7 @@ legend entries={$\bfQ = \bfI_{:,1:p}$,  $\bfQ = \bfW_{:,1:p}$, $\bfQ = \bfC_{1:p
 
 
 
-\foreach[count=\c from 1] \M in {Z, C, W, I}{
+\foreach[count=\c from 1] \M in {I, W, C, Z}{
 
 \edef\temp{
 

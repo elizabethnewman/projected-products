@@ -141,7 +141,7 @@ writetable(T,[saveDir,'rel_error_color_scales.csv'], 'writevariablenames', 1)
 
 %% store images
 
-kpPairs = [1, 10; 5,10; 20, 50; 20, 100];
+kpPairs = [5, 2; 5, 220];
 frame   = 75;
 [R,G,B] = deal(26,16,8);
 
@@ -153,7 +153,7 @@ pbaspect([size(A,2) size(A,1) 1])
 exportgraphics(gcf,[saveDir,'/img_RGB_.png'])
 
 T = [];
-for j = 1:2:length(Q)
+for j = 5
     % transform data
     AHat = modeProduct(A,Q{j + 1}');
     
@@ -168,6 +168,8 @@ for j = 1:2:length(Q)
         Qp      = Q{j + 1}(:,1:pp);
         [U,S,V] = projsvd(A,Qp,kk);
         Ak      = projprod(U,projprod(S,tran(V),Qp),Qp);
+        
+        disp(fronorm(A - Ak))
 
         figure(1); clf;
         imagesc(rescale(Ak(:,:,[R,G,B])));
